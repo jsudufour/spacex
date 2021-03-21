@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import MajorMonoTTF from "./fonts/MajorMonoDisplay-Regular.ttf";
+import KanitTTF from "./fonts/Kanit-ExtraLight.ttf";
 import { colors } from "./utils/colors";
 import { Header } from "./components/Header";
 import { Modal } from "./components/Modal";
@@ -10,14 +10,14 @@ const GlobalStyle = createGlobalStyle`
 body {
   background-color: black;
   margin: 0;
-  font-family: "Major Mono Display", monospace;
+  font-family: 'Kanit', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
   @font-face {
-    font-family: 'Major Mono Display';
-    src: url(${MajorMonoTTF}) format('truetype');
+   font-family: 'Kanit';
+    src: url(${KanitTTF}) format('truetype');
     font-weight: 300;
     font-style: normal;
     font-display: auto;
@@ -32,6 +32,7 @@ const Attribution = styled.div`
 
 export const App = () => {
   const [isModalShowing, setIsModalShowing] = useState(false);
+  const [currentSpacecrafts, setCurrentSpacecrafts] = useState("ROCKETS");
 
   return (
     <AppWrapper className="App">
@@ -40,7 +41,10 @@ export const App = () => {
         isModalShowing={isModalShowing}
         closeModal={() => setIsModalShowing(false)}
       />
-      <Header />
+      <Header
+        toggleSpacecrafts={setCurrentSpacecrafts}
+        currentSpacecrafts={currentSpacecrafts}
+      />
       <GridItems
         showModal={() => setIsModalShowing(true)}
         spacecrafts={[
