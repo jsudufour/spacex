@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../utils/colors";
 import { spacings } from "../utils/spacings";
 import { DetailedRocket, DetailedDragon } from "../domain/types";
+import { PropertiesList } from "./PropertiesList";
 
 const CardWrapper = styled.div`
   padding: ${spacings.small};
@@ -15,16 +16,6 @@ const Title = styled.h4``;
 
 const LineItem = styled.div`
   display: flex;
-`;
-
-const BoldText = styled.p`
-  color: ${colors.greenBlack};
-  font-weight: 400;
-`;
-
-const Label = styled.p`
-  color: ${colors.darkGrey};
-  font-weight: 200;
 `;
 
 const Image = styled.img`
@@ -54,13 +45,7 @@ export const DetailedCard = ({ spacecraft }: Props) => {
         <Image src={image}></Image>
         <Description>{description}</Description>
       </LineItem>
-      {Object.keys(otherProps).map((element) => (
-        <LineItem>
-          {/* TODO : use lodash to get sentence case */}
-          <BoldText>{element}: </BoldText>
-          {/* <Label>{spacecraft[element]}</Label> */}
-        </LineItem>
-      ))}
+      <PropertiesList otherProps={otherProps} />
       <Footer>
         <Link href={wikipedia}>Learn more</Link>
       </Footer>
