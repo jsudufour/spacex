@@ -1,9 +1,28 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+import MajorMonoTTF from "./fonts/MajorMonoDisplay-Regular.ttf";
 import { colors } from "./utils/colors";
 import { Header } from "./components/Header";
 import { Modal } from "./components/Modal";
 import { GridItems } from "./components/GridItems";
+
+const GlobalStyle = createGlobalStyle`
+body {
+  background-color: black;
+  margin: 0;
+  font-family: "Major Mono Display", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+  @font-face {
+    font-family: 'Major Mono Display';
+    src: url(${MajorMonoTTF}) format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: auto;
+  }
+`;
 
 const AppWrapper = styled.div``;
 
@@ -16,6 +35,7 @@ export const App = () => {
 
   return (
     <AppWrapper className="App">
+      <GlobalStyle />
       <Modal
         isModalShowing={isModalShowing}
         closeModal={() => setIsModalShowing(false)}

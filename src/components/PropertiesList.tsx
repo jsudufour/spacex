@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { startCase } from "lodash-es";
 import { colors } from "../utils/colors";
+import { spacings } from "../utils/spacings";
 
 const LineItem = styled.div`
   display: flex;
@@ -14,6 +16,7 @@ const BoldText = styled.p`
 const Label = styled.p`
   color: ${colors.darkGrey};
   font-weight: 200;
+  margin-right: ${spacings.smallest};
 `;
 
 type Props = {
@@ -24,8 +27,7 @@ export const PropertiesList = ({ otherProps }: Props) => (
   <React.Fragment>
     {Object.entries(otherProps).map(([label, value]) => (
       <LineItem>
-        {/* TODO : use lodash to get sentence case */}
-        <BoldText>{label}: </BoldText>
+        <BoldText>{startCase(label)}: </BoldText>
         <Label>{value}</Label>
       </LineItem>
     ))}
