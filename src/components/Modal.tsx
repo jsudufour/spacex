@@ -34,19 +34,27 @@ const ModalBody = styled.div`
 const ModalControls = styled.div`
   padding: ${spacings.small};
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
-const CloseButton = styled.button``;
+const CloseButton = styled.button`
+  border: none;
+  color: ${colors.grey};
+  background-color: ${colors.darkPink};
+  padding: ${spacings.small};
+  border-radius: ${spacings.radius};
+  cursor: pointer;
+`;
 
 // props
 // { handleClose, show, children }
 type Props = {
-  isShowingModal: boolean;
+  isModalShowing: boolean;
+  closeModal: () => void;
 };
 
-export const Modal = ({ isShowingModal }: Props) =>
-  isShowingModal ? (
+export const Modal = ({ isModalShowing, closeModal }: Props) =>
+  isModalShowing ? (
     <ModalWrapper>
       <ModalContent>
         <ModalHeader>
@@ -54,7 +62,7 @@ export const Modal = ({ isShowingModal }: Props) =>
         </ModalHeader>
         <ModalBody>{/* {children} */}</ModalBody>
         <ModalControls>
-          <CloseButton>Close</CloseButton>
+          <CloseButton onClick={closeModal}>Close</CloseButton>
         </ModalControls>
       </ModalContent>
     </ModalWrapper>

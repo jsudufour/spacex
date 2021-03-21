@@ -1,8 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../utils/colors";
 import { spacings } from "../utils/spacings";
+import { SummaryRocket, SummaryDragon } from "../domain/types";
+import { SummaryCard } from "./SummaryCard";
 
-type Props = {};
+const GridWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: ${spacings.small};
+  row-gap: ${spacings.small};
+`;
 
-export const GridItems = ({}: Props) => {};
+type Props = {
+  spacecrafts: Array<SummaryRocket | SummaryDragon>;
+  showModal: () => void;
+};
+
+export const GridItems = ({ spacecrafts, showModal }: Props) => (
+  <GridWrapper>
+    {spacecrafts.map((spacecraft) => (
+      <SummaryCard spacecraft={spacecraft} showModal={showModal} />
+    ))}
+  </GridWrapper>
+);

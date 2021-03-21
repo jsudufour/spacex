@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../utils/colors";
 import { spacings } from "../utils/spacings";
+import { SummaryRocket, SummaryDragon } from "../domain/types";
 
 const CardWrapper = styled.div`
+  padding: ${spacings.small};
   background-color: ${colors.grey};
   border-radius: ${spacings.radius};
   width: 250px;
+  cursor: pointer;
 `;
 
 const Title = styled.h4``;
@@ -26,37 +29,23 @@ const Label = styled.p`
 `;
 
 type Props = {
-  rocketName: string;
-  active: boolean;
-  firstFlight: string;
-  costPerLaunch: string;
-  country: string;
+  spacecraft: SummaryRocket | SummaryDragon;
+  showModal: (arg0: boolean) => void;
 };
 
-export const SummaryCard = ({
-  rocketName,
-  active,
-  firstFlight,
-  costPerLaunch,
-  country,
-}: Props) => {
-  <CardWrapper>
-    <Title>{rocketName}</Title>
-    <LineItem>
-      <BoldText>active: </BoldText>
-      <Label>{active}</Label>
-    </LineItem>
-    <LineItem>
-      <BoldText>first flight: </BoldText>
-      <Label>{firstFlight}</Label>
-    </LineItem>
-    <LineItem>
-      <BoldText>cost per launch: </BoldText>
-      <Label>{costPerLaunch}</Label>
-    </LineItem>
-    <LineItem>
-      <BoldText>country: </BoldText>
-      <Label>{country}</Label>
-    </LineItem>
-  </CardWrapper>;
+export const SummaryCard = ({ spacecraft, showModal }: Props) => {
+  const { id, name, image, ...otherProps } = spacecraft;
+  console.log("name, image, other props: ", name, image, otherProps);
+  return (
+    <CardWrapper onClick={() => showModal(true)}>
+      <Title>{name}</Title>
+      {Object.keys(otherProps).map((propertyName) => (
+        <LineItem>
+          {/* TODO : use lodash to get sentence case */}
+          <BoldText>{propertyName}: </BoldText>
+          {/* <Label>{spacecraft[propertyName]}</Label> */}
+        </LineItem>
+      ))}
+    </CardWrapper>
+  );
 };
