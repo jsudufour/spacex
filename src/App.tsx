@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { colors } from "./utils/colors";
 import { Header } from "./components/Header";
 import { Modal } from "./components/Modal";
 import { GridItems } from "./components/GridItems";
 
 const AppWrapper = styled.div``;
+
+const Attribution = styled.div`
+  color: ${colors.greenBlack};
+`;
 
 export const App = () => {
   const [isModalShowing, setIsModalShowing] = useState(false);
@@ -43,6 +48,16 @@ export const App = () => {
           },
         ]}
       />
+      <Attribution>
+        Icons made by{" "}
+        <a href="https://www.freepik.com" title="Freepik">
+          Freepik
+        </a>{" "}
+        from{" "}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </Attribution>
     </AppWrapper>
   );
 };

@@ -1,6 +1,6 @@
 export const colors = {
-    lightPink: '#c590a4ff',
-    darkPink: '#a85976ff',
+    iris: '#454ADE',
+    darkTeal: '#0c343d',
     grey: '#e2dfe0ff',
     offWhite: '#f5f4f5ff',
     darkGrey: '#817479ff',

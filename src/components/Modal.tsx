@@ -9,7 +9,7 @@ const ModalWrapper = styled.div`
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@ const ModalControls = styled.div`
 const CloseButton = styled.button`
   border: none;
   color: ${colors.grey};
-  background-color: ${colors.darkPink};
+  background-color: ${colors.darkTeal};
   padding: ${spacings.small};
   border-radius: ${spacings.radius};
   cursor: pointer;
@@ -55,8 +55,8 @@ type Props = {
 
 export const Modal = ({ isModalShowing, closeModal }: Props) =>
   isModalShowing ? (
-    <ModalWrapper>
-      <ModalContent>
+    <ModalWrapper onClick={closeModal}>
+      <ModalContent onClick={(event) => event.stopPropagation()}>
         <ModalHeader>
           <ModalTitle></ModalTitle>
         </ModalHeader>

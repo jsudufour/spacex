@@ -12,15 +12,19 @@ const CardWrapper = styled.div`
   cursor: pointer;
 `;
 
-const Title = styled.h4``;
+const Title = styled.h3`
+  color: ${colors.darkTeal};
+`;
 
 const LineItem = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const BoldText = styled.p`
-  color: ${colors.greenBlack};
-  font-weight: 400;
+  color: ${colors.darkTeal};
+  font-weight: 700;
+  margin-right: ${spacings.smallest};
 `;
 
 const Label = styled.p`
@@ -34,16 +38,16 @@ type Props = {
 };
 
 export const SummaryCard = ({ spacecraft, showModal }: Props) => {
-  const { id, name, image, ...otherProps } = spacecraft;
+  const { id, name, image, active, ...otherProps } = spacecraft;
   console.log("name, image, other props: ", name, image, otherProps);
   return (
     <CardWrapper onClick={() => showModal(true)}>
       <Title>{name}</Title>
-      {Object.keys(otherProps).map((propertyName) => (
+      {Object.entries(otherProps).map(([label, value]) => (
         <LineItem>
           {/* TODO : use lodash to get sentence case */}
-          <BoldText>{propertyName}: </BoldText>
-          {/* <Label>{spacecraft[propertyName]}</Label> */}
+          <BoldText>{label}: </BoldText>
+          <Label>{value}</Label>
         </LineItem>
       ))}
     </CardWrapper>
