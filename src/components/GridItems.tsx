@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+
 import { spacings } from "../utils/spacings";
 import { SummaryRocket, SummaryDragon } from "../domain/types";
 import { SummaryCard } from "./SummaryCard";
 
 const GridWrapper = styled.div`
+  padding: ${spacings.large};
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: ${spacings.small};
@@ -19,7 +21,11 @@ type Props = {
 export const GridItems = ({ spacecrafts, showModal }: Props) => (
   <GridWrapper>
     {spacecrafts.map((spacecraft) => (
-      <SummaryCard spacecraft={spacecraft} showModal={showModal} />
+      <SummaryCard
+        key={spacecraft.id}
+        spacecraft={spacecraft}
+        showModal={showModal}
+      />
     ))}
   </GridWrapper>
 );

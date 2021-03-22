@@ -26,7 +26,7 @@ type Props = {
 export const PropertiesList = ({ otherProps }: Props) => (
   <React.Fragment>
     {Object.entries(otherProps).map(([label, value]) => (
-      <LineItem>
+      <LineItem key={label}>
         <BoldText>{startCase(label)}: </BoldText>
         <Label>{value}</Label>
       </LineItem>

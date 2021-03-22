@@ -47,7 +47,7 @@ const CloseButton = styled.button`
 `;
 
 // props
-// { handleClose, show, children }
+// {  children }
 type Props = {
   isModalShowing: boolean;
   closeModal: () => void;
@@ -62,7 +62,7 @@ export const Modal = ({ isModalShowing, closeModal }: Props) =>
         </ModalHeader>
         <ModalBody>{/* {children} */}</ModalBody>
         <ModalControls>
-          <CloseButton onClick={closeModal}>Close</CloseButton>
+          <CloseButton onClick={closeModal}>close</CloseButton>
         </ModalControls>
       </ModalContent>
     </ModalWrapper>
