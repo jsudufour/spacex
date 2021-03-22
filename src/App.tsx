@@ -8,6 +8,7 @@ import { GridItems } from "./components/GridItems";
 import { Loading } from "./components/Loading";
 import { fetchRocketsRequest, fetchDragonsRequest } from "./store/actions";
 import type { RootState } from "./store";
+import { dragonsSelector, rocketsSelector } from "./store/selectors";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -34,8 +35,8 @@ export const App = () => {
   const [currentSpacecrafts, setCurrentSpacecrafts] = useState("ROCKETS");
 
   const { rockets, dragons, isLoading } = useSelector((state: RootState) => ({
-    rockets: state.rockets,
-    dragons: state.dragons,
+    rockets: rocketsSelector(state),
+    dragons: dragonsSelector(state),
     isLoading: state.isLoading,
   }));
 
@@ -45,9 +46,6 @@ export const App = () => {
     dispatch(fetchRocketsRequest());
     dispatch(fetchDragonsRequest());
   }, [dispatch]);
-
-  console.log("rockets", rockets);
-  console.log("dragons", dragons);
 
   return (
     <AppWrapper className="App">
@@ -65,8 +63,7 @@ export const App = () => {
       ) : (
         <GridItems
           showModal={() => setIsModalShowing(true)}
-          spacecrafts={[]}
-          // spacecrafts={currentSpacecrafts === "ROCKETS" ? rockets : dragons}
+          spacecrafts={currentSpacecrafts === "ROCKETS" ? rockets : dragons}
         />
       )}
     </AppWrapper>
