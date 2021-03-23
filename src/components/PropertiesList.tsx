@@ -10,7 +10,7 @@ const LineItem = styled.div`
 `;
 
 const BoldText = styled.p`
-  color: ${colors.greenBlack};
+  color: ${colors.darkTeal};
   font-weight: 500;
   margin-right: ${spacings.smallest};
   margin: ${spacings.smallest};
