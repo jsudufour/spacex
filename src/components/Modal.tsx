@@ -7,6 +7,7 @@ import type { RootState } from "../store";
 import { currentSpacecraftSelector } from "../store/selectors";
 import { DetailedCard } from "./DetailedCard";
 import { Loading } from "./Loading";
+import { Error } from "./Error";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -54,6 +55,10 @@ export const Modal = ({ isModalShowing, closeModal }: Props) => {
       hasError: state.hasError,
     })
   );
+
+  if (hasError) {
+    return <Error />;
+  }
 
   if (isModalShowing) {
     return spacecraft !== undefined && !isLoading ? (

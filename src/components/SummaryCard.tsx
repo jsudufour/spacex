@@ -6,6 +6,7 @@ import { spacings } from "../utils/spacings";
 import { SummaryRocket, SummaryDragon } from "../domain/types";
 import { PropertiesList } from "./PropertiesList";
 import { Loading } from "./Loading";
+import { Error } from "./Error";
 import type { RootState } from "../store";
 import {
   fetchRocketDetailsRequest,
@@ -32,13 +33,19 @@ type Props = {
 };
 
 export const SummaryCard = ({ spacecraft, showModal, type }: Props) => {
-  const { isLoading } = useSelector((state: RootState) => ({
+  const { isLoading, hasError } = useSelector((state: RootState) => ({
     isLoading: state.isLoading,
+    hasError: state.hasError,
   }));
 
   const dispatch = useDispatch();
 
   const { id, name, image, active, ...otherProps } = spacecraft;
+
+  if (hasError) {
+    return <Error />;
+  }
+
   return isLoading ? (
     <Loading />
   ) : (

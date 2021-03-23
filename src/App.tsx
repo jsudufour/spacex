@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { Modal } from "./components/Modal";
 import { GridItems } from "./components/GridItems";
 import { Loading } from "./components/Loading";
+import { Error } from "./components/Error";
 import { fetchRocketsRequest, fetchDragonsRequest } from "./store/actions";
 import type { RootState } from "./store";
 import { dragonsSelector, rocketsSelector } from "./store/selectors";
@@ -35,11 +36,14 @@ export const App = () => {
   const [isModalShowing, setIsModalShowing] = useState(false);
   const [currentSpacecrafts, setCurrentSpacecrafts] = useState(ROCKETS);
 
-  const { rockets, dragons, isLoading } = useSelector((state: RootState) => ({
-    rockets: rocketsSelector(state),
-    dragons: dragonsSelector(state),
-    isLoading: state.isLoading,
-  }));
+  const { rockets, dragons, isLoading, hasError } = useSelector(
+    (state: RootState) => ({
+      rockets: rocketsSelector(state),
+      dragons: dragonsSelector(state),
+      isLoading: state.isLoading,
+      hasError: state.hasError,
+    })
+  );
 
   const dispatch = useDispatch();
 
@@ -59,7 +63,8 @@ export const App = () => {
         toggleSpacecrafts={setCurrentSpacecrafts}
         currentSpacecrafts={currentSpacecrafts}
       />
-      {isLoading ? (
+      {hasError && <Error />}
+      {!hasError && isLoading ? (
         <Loading />
       ) : (
         <GridItems
