@@ -21,34 +21,24 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalContent = styled.div`
+  padding: ${spacings.smallest};
   width: 500px;
+  height: 500px;
   background-color: ${colors.grey};
   border-radius: ${spacings.radius};
+  overflow: auto;
 `;
 
 const ModalHeader = styled.div`
   padding: ${spacings.small};
 `;
 
-const ModalTitle = styled.h3``;
+const ModalTitle = styled.h3`
+  margin: 0;
+`;
 
 const ModalBody = styled.div`
   padding: ${spacings.small};
-`;
-
-const ModalControls = styled.div`
-  padding: ${spacings.small};
-  display: flex;
-  justify-content: center;
-`;
-
-const CloseButton = styled.button`
-  border: none;
-  color: ${colors.grey};
-  background-color: ${colors.darkTeal};
-  padding: ${spacings.small};
-  border-radius: ${spacings.radius};
-  cursor: pointer;
 `;
 
 type Props = {
@@ -79,9 +69,6 @@ export const Modal = ({ isModalShowing, closeModal }: Props) => {
               hasError={hasError}
             />
           </ModalBody>
-          <ModalControls>
-            <CloseButton onClick={closeModal}>close</CloseButton>
-          </ModalControls>
         </ModalContent>
       </ModalWrapper>
     ) : (

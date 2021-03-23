@@ -6,26 +6,46 @@ import { DetailedRocket, DetailedDragon } from "../domain/types";
 import { PropertiesList } from "./PropertiesList";
 import { Loading } from "./Loading";
 
-const CardWrapper = styled.div`
-  padding: ${spacings.small};
-  background-color: ${colors.grey};
-  border-radius: ${spacings.radius};
-  width: 250px;
+const Title = styled.h2`
+  margin: 0;
+  color: ${colors.darkTeal};
 `;
 
-const Title = styled.h4``;
+const Subtitle = styled.h4`
+  margin: 0;
+  font-weight: 800;
+  margin: ${spacings.medium} 0 ${spacings.small} 0;
+  color: ${colors.darkTeal};
+`;
 
-const LineItem = styled.div`
+const ImageWrapper = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 const Image = styled.img`
+  padding: ${spacings.small} 0;
   border-radius: ${spacings.radius};
+  height: 350px;
+  width: 350px;
+  object-fit: scale-down;
 `;
 
-const Description = styled.p``;
+const Description = styled.p`
+  color: ${colors.darkGrey};
+  padding: ${spacings.small} ${spacings.small} ${spacings.small} 0;
+`;
 
-const Link = styled.a``;
+const Link = styled.a`
+  p {
+    color: ${colors.darkTeal};
+    font-weight: 500;
+  }
+  text-decoration: none;
+  :visited {
+    text-decoration: none;
+  }
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -52,16 +72,19 @@ export const DetailedCard = ({ spacecraft, isLoading, hasError }: Props) => {
   return isLoading && !spacecraft ? (
     <Loading />
   ) : (
-    <CardWrapper>
+    <React.Fragment>
       <Title>{name}</Title>
-      <LineItem>
-        <Image src={image}></Image>
-        <Description>{description}</Description>
-      </LineItem>
+      <Description>{description}</Description>
+      <Subtitle>Quick facts</Subtitle>
       <PropertiesList otherProps={otherProps} />
+      <ImageWrapper>
+        <Image alt={`image of ${name}`} src={image} />
+      </ImageWrapper>
       <Footer>
-        <Link href={wikipedia}>Learn more</Link>
+        <Link href={wikipedia} target="_blank">
+          <p>Learn more</p>
+        </Link>
       </Footer>
-    </CardWrapper>
+    </React.Fragment>
   );
 };
