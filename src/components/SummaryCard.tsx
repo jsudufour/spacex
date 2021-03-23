@@ -15,10 +15,12 @@ import {
 import { ROCKETS, DRAGONS } from "../store/constants";
 
 const CardWrapper = styled.div`
-  padding: ${spacings.small};
+  margin: ${spacings.medium};
+  padding: ${spacings.medium};
   background-color: ${colors.grey};
   border-radius: ${spacings.radius};
-  width: 250px;
+  width: 300px;
+  height: 250px;
   cursor: pointer;
 `;
 
