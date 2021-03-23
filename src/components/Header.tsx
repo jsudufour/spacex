@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../utils/colors";
 import { spacings } from "../utils/spacings";
 import logo from "../assets/spacex.jpg";
+import { DRAGONS, ROCKETS } from "../store/constants";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -23,31 +24,47 @@ const AlignedItems = styled.div`
   padding-bottom: ${spacings.medium};
 `;
 
-const Chip = styled.div`
+type StylingProps = {
+  isActive: boolean;
+};
+
+const Chip = styled.div<StylingProps>`
   display: flex;
   align-items: center;
-  background-color: ${colors.grey};
+  background-color: ${({ isActive }) =>
+    isActive ? colors.darkTeal : colors.grey};
   border-radius: ${spacings.radius};
   padding: ${spacings.smallest};
   cursor: pointer;
   margin: ${spacings.medium};
 `;
 
-const Title = styled.h2`
+const Title = styled.h2<StylingProps>`
   padding: ${spacings.small} ${spacings.medium};
-  color: ${colors.darkTeal};
+  color: ${({ isActive }) => (isActive ? colors.grey : colors.darkTeal)};
   margin: 0;
 `;
 
-export const Header = () => (
+type Props = {
+  toggleSpacecrafts: (arg0: string) => void;
+  currentSpacecrafts: string;
+};
+
+export const Header = ({ toggleSpacecrafts, currentSpacecrafts }: Props) => (
   <HeaderWrapper>
     <Logo src={logo} alt="spacex logo" />
     <AlignedItems>
-      <Chip>
-        <Title>rockets</Title>
+      <Chip
+        isActive={currentSpacecrafts === ROCKETS}
+        onClick={() => toggleSpacecrafts(ROCKETS)}
+      >
+        <Title isActive={currentSpacecrafts === ROCKETS}>rockets</Title>
       </Chip>
-      <Chip>
-        <Title>dragons</Title>
+      <Chip
+        isActive={currentSpacecrafts === DRAGONS}
+        onClick={() => toggleSpacecrafts(DRAGONS)}
+      >
+        <Title isActive={currentSpacecrafts === DRAGONS}>dragons</Title>
       </Chip>
     </AlignedItems>
   </HeaderWrapper>
