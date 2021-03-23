@@ -22,24 +22,12 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalContent = styled.div`
-  padding: ${spacings.smallest};
+  padding: ${spacings.medium};
   width: 500px;
   height: 500px;
   background-color: ${colors.grey};
   border-radius: ${spacings.radius};
   overflow: auto;
-`;
-
-const ModalHeader = styled.div`
-  padding: ${spacings.small};
-`;
-
-const ModalTitle = styled.h3`
-  margin: 0;
-`;
-
-const ModalBody = styled.div`
-  padding: ${spacings.small};
 `;
 
 type Props = {
@@ -64,16 +52,11 @@ export const Modal = ({ isModalShowing, closeModal }: Props) => {
     return spacecraft !== undefined && !isLoading ? (
       <ModalWrapper onClick={closeModal}>
         <ModalContent onClick={(event) => event.stopPropagation()}>
-          <ModalHeader>
-            <ModalTitle></ModalTitle>
-          </ModalHeader>
-          <ModalBody>
-            <DetailedCard
-              spacecraft={spacecraft}
-              isLoading={isLoading}
-              hasError={hasError}
-            />
-          </ModalBody>
+          <DetailedCard
+            spacecraft={spacecraft}
+            isLoading={isLoading}
+            hasError={hasError}
+          />
         </ModalContent>
       </ModalWrapper>
     ) : (

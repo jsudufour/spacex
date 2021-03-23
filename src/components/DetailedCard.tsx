@@ -69,7 +69,7 @@ export const DetailedCard = ({ spacecraft, isLoading, hasError }: Props) => {
     ...otherProps
   } = spacecraft;
 
-  return isLoading && !spacecraft ? (
+  return isLoading ? (
     <Loading />
   ) : (
     <React.Fragment>
