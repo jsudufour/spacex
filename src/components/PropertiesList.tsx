@@ -11,12 +11,12 @@ const LineItem = styled.div`
 const BoldText = styled.p`
   color: ${colors.greenBlack};
   font-weight: 400;
+  margin-right: ${spacings.smallest};
 `;
 
 const Label = styled.p`
   color: ${colors.darkGrey};
   font-weight: 200;
-  margin-right: ${spacings.smallest};
 `;
 
 type Props = {
@@ -26,7 +26,7 @@ type Props = {
 export const PropertiesList = ({ otherProps }: Props) => (
   <React.Fragment>
     {Object.entries(otherProps).map(([label, value]) => (
-      <LineItem>
+      <LineItem key={label}>
         <BoldText>{startCase(label)}: </BoldText>
         <Label>{value}</Label>
       </LineItem>
