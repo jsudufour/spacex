@@ -7,6 +7,7 @@ import type { RootState } from "../store";
 import { currentSpacecraftSelector } from "../store/selectors";
 import { DetailedCard } from "./DetailedCard";
 import { Loading } from "./Loading";
+import { Error } from "./Error";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -21,34 +22,12 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalContent = styled.div`
+  padding: ${spacings.medium};
   width: 500px;
+  height: 500px;
   background-color: ${colors.grey};
   border-radius: ${spacings.radius};
-`;
-
-const ModalHeader = styled.div`
-  padding: ${spacings.small};
-`;
-
-const ModalTitle = styled.h3``;
-
-const ModalBody = styled.div`
-  padding: ${spacings.small};
-`;
-
-const ModalControls = styled.div`
-  padding: ${spacings.small};
-  display: flex;
-  justify-content: center;
-`;
-
-const CloseButton = styled.button`
-  border: none;
-  color: ${colors.grey};
-  background-color: ${colors.darkTeal};
-  padding: ${spacings.small};
-  border-radius: ${spacings.radius};
-  cursor: pointer;
+  overflow: auto;
 `;
 
 type Props = {
@@ -65,23 +44,19 @@ export const Modal = ({ isModalShowing, closeModal }: Props) => {
     })
   );
 
+  if (hasError) {
+    return <Error />;
+  }
+
   if (isModalShowing) {
     return spacecraft !== undefined && !isLoading ? (
       <ModalWrapper onClick={closeModal}>
         <ModalContent onClick={(event) => event.stopPropagation()}>
-          <ModalHeader>
-            <ModalTitle></ModalTitle>
-          </ModalHeader>
-          <ModalBody>
-            <DetailedCard
-              spacecraft={spacecraft}
-              isLoading={isLoading}
-              hasError={hasError}
-            />
-          </ModalBody>
-          <ModalControls>
-            <CloseButton onClick={closeModal}>close</CloseButton>
-          </ModalControls>
+          <DetailedCard
+            spacecraft={spacecraft}
+            isLoading={isLoading}
+            hasError={hasError}
+          />
         </ModalContent>
       </ModalWrapper>
     ) : (

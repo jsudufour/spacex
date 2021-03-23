@@ -6,11 +6,11 @@ import { SummaryRocket, SummaryDragon } from "../domain/types";
 import { SummaryCard } from "./SummaryCard";
 
 const GridWrapper = styled.div`
-  padding: ${spacings.large};
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: ${spacings.small};
-  row-gap: ${spacings.small};
+  padding: ${spacings.largest} 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 type Props = {

@@ -22,27 +22,31 @@ import {
 export const fetchRocketsRequest = () => (dispatch) => {
   dispatch({ type: FETCH_ROCKETS_REQUEST });
 
-  const url = getRocketsUrl();
-
-  makeRequest(dispatch, url, FETCH_ROCKETS_SUCCESS, FETCH_SPACECRAFTS_FAIL);
+  makeRequest(
+    dispatch,
+    getRocketsUrl(),
+    FETCH_ROCKETS_SUCCESS,
+    FETCH_SPACECRAFTS_FAIL
+  );
 };
 
 export const fetchDragonsRequest = () => (dispatch) => {
   dispatch({ type: FETCH_DRAGONS_REQUEST });
 
-  const url = getDragonsUrl();
-
-  makeRequest(dispatch, url, FETCH_DRAGONS_SUCCESS, FETCH_SPACECRAFTS_FAIL);
+  makeRequest(
+    dispatch,
+    getDragonsUrl(),
+    FETCH_DRAGONS_SUCCESS,
+    FETCH_SPACECRAFTS_FAIL
+  );
 };
 
 export const fetchRocketDetailsRequest = (id, spacecraftType) => (dispatch) => {
   dispatch({ type: FETCH_ROCKET_DETAILS_REQUEST });
 
-  const url = getOneRocketUrl(id);
-
   makeRequestWithParams(
     dispatch,
-    url,
+    getOneRocketUrl(id),
     FETCH_ROCKET_DETAILS_SUCCESS,
     FETCH_SPACECRAFT_DETAILS_FAIL,
     spacecraftType
@@ -52,11 +56,9 @@ export const fetchRocketDetailsRequest = (id, spacecraftType) => (dispatch) => {
 export const fetchDragonDetailsRequest = (id, spacecraftType) => (dispatch) => {
   dispatch({ type: FETCH_DRAGON_DETAILS_REQUEST });
 
-  const url = getOneDragonUrl(id);
-
   makeRequestWithParams(
     dispatch,
-    url,
+    getOneDragonUrl(id),
     FETCH_DRAGON_DETAILS_SUCCESS,
     FETCH_SPACECRAFT_DETAILS_FAIL,
     spacecraftType

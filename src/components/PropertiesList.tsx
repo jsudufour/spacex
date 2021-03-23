@@ -6,17 +6,20 @@ import { spacings } from "../utils/spacings";
 
 const LineItem = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const BoldText = styled.p`
-  color: ${colors.greenBlack};
-  font-weight: 400;
+  color: ${colors.darkTeal};
+  font-weight: 500;
   margin-right: ${spacings.smallest};
+  margin: ${spacings.smallest};
 `;
 
 const Label = styled.p`
   color: ${colors.darkGrey};
   font-weight: 200;
+  margin: ${spacings.smallest};
 `;
 
 type Props = {

@@ -6,6 +6,7 @@ import { spacings } from "../utils/spacings";
 import { SummaryRocket, SummaryDragon } from "../domain/types";
 import { PropertiesList } from "./PropertiesList";
 import { Loading } from "./Loading";
+import { Error } from "./Error";
 import type { RootState } from "../store";
 import {
   fetchRocketDetailsRequest,
@@ -14,10 +15,12 @@ import {
 import { ROCKETS, DRAGONS } from "../store/constants";
 
 const CardWrapper = styled.div`
-  padding: ${spacings.small};
+  margin: ${spacings.medium};
+  padding: ${spacings.medium};
   background-color: ${colors.grey};
   border-radius: ${spacings.radius};
-  width: 250px;
+  width: 300px;
+  height: 250px;
   cursor: pointer;
 `;
 
@@ -32,13 +35,19 @@ type Props = {
 };
 
 export const SummaryCard = ({ spacecraft, showModal, type }: Props) => {
-  const { isLoading } = useSelector((state: RootState) => ({
+  const { isLoading, hasError } = useSelector((state: RootState) => ({
     isLoading: state.isLoading,
+    hasError: state.hasError,
   }));
 
   const dispatch = useDispatch();
 
   const { id, name, image, active, ...otherProps } = spacecraft;
+
+  if (hasError) {
+    return <Error />;
+  }
+
   return isLoading ? (
     <Loading />
   ) : (
