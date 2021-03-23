@@ -1,7 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { colors } from "../utils/colors";
 import { spacings } from "../utils/spacings";
+import type { RootState } from "../store";
+import { currentSpacecraftSelector } from "../store/selectors";
+import { DetailedCard } from "./DetailedCard";
+import { Loading } from "./Loading";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -46,24 +51,42 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-// props
-// {  children }
 type Props = {
   isModalShowing: boolean;
   closeModal: () => void;
 };
 
-export const Modal = ({ isModalShowing, closeModal }: Props) =>
-  isModalShowing ? (
-    <ModalWrapper onClick={closeModal}>
-      <ModalContent onClick={(event) => event.stopPropagation()}>
-        <ModalHeader>
-          <ModalTitle></ModalTitle>
-        </ModalHeader>
-        <ModalBody>{/* {children} */}</ModalBody>
-        <ModalControls>
-          <CloseButton onClick={closeModal}>close</CloseButton>
-        </ModalControls>
-      </ModalContent>
-    </ModalWrapper>
-  ) : null;
+export const Modal = ({ isModalShowing, closeModal }: Props) => {
+  const { spacecraft, isLoading, hasError } = useSelector(
+    (state: RootState) => ({
+      spacecraft: currentSpacecraftSelector(state),
+      isLoading: state.isLoading,
+      hasError: state.hasError,
+    })
+  );
+
+  if (isModalShowing) {
+    return spacecraft !== undefined && !isLoading ? (
+      <ModalWrapper onClick={closeModal}>
+        <ModalContent onClick={(event) => event.stopPropagation()}>
+          <ModalHeader>
+            <ModalTitle></ModalTitle>
+          </ModalHeader>
+          <ModalBody>
+            <DetailedCard
+              spacecraft={spacecraft}
+              isLoading={isLoading}
+              hasError={hasError}
+            />
+          </ModalBody>
+          <ModalControls>
+            <CloseButton onClick={closeModal}>close</CloseButton>
+          </ModalControls>
+        </ModalContent>
+      </ModalWrapper>
+    ) : (
+      <Loading />
+    );
+  }
+  return null;
+};

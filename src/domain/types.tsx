@@ -11,16 +11,17 @@ export interface SummaryRocket {
 }
 
 export interface DetailedRocket {
+  type: "ROCKET";
   id: string;
   name: string;
   wikipedia: string;
   description: string;
-  image: string; // flickr_images[0]
+  image: string;
   stages: number;
   boosters: number;
-  height: number; // meters
-  diameter: number; // meters
-  mass: number; // lb
+  height: string;
+  diameter: string;
+  mass: string;
   engines: number;
   engineType: string;
   landingLegsNumber: number;
@@ -38,15 +39,16 @@ export interface SummaryDragon {
 }
 
 export interface DetailedDragon {
+  type: "DRAGON";
   id: string;
   name: string;
   wikipedia: string;
   description: string;
-  image: string; // flickr_images
-  orbitDuration: number;
-  diameter: number; // meters
-  heightWTrunk: number; // meters
-  dryMass: number; // lb,
-  launchPayloadMass: number; // lb
-  returnPayloadMass: number; // lb
+  image: string;
+  orbitDuration: string;
+  diameter: string;
+  heightWTrunk: string;
+  dryMass: string;
+  launchPayloadMass: string;
+  returnPayloadMass: string;
 }

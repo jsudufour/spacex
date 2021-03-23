@@ -9,6 +9,7 @@ import { Loading } from "./components/Loading";
 import { fetchRocketsRequest, fetchDragonsRequest } from "./store/actions";
 import type { RootState } from "./store";
 import { dragonsSelector, rocketsSelector } from "./store/selectors";
+import { ROCKETS } from "./store/constants";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -32,7 +33,7 @@ const AppWrapper = styled.div``;
 
 export const App = () => {
   const [isModalShowing, setIsModalShowing] = useState(false);
-  const [currentSpacecrafts, setCurrentSpacecrafts] = useState("ROCKETS");
+  const [currentSpacecrafts, setCurrentSpacecrafts] = useState(ROCKETS);
 
   const { rockets, dragons, isLoading } = useSelector((state: RootState) => ({
     rockets: rocketsSelector(state),
@@ -63,7 +64,8 @@ export const App = () => {
       ) : (
         <GridItems
           showModal={() => setIsModalShowing(true)}
-          spacecrafts={currentSpacecrafts === "ROCKETS" ? rockets : dragons}
+          spacecrafts={currentSpacecrafts === ROCKETS ? rockets : dragons}
+          type={currentSpacecrafts}
         />
       )}
     </AppWrapper>

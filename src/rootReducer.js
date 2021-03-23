@@ -1,18 +1,16 @@
 import { combineReducers } from "redux";
 import {
   rockets,
-  currentRocket,
   dragons,
-  currentDragon,
+  currentSpacecraft,
   isLoading,
   hasError,
 } from "./store/reducers";
 
 export const rootReducer = combineReducers({
   rockets,
-  currentRocket,
   dragons,
-  currentDragon,
+  currentSpacecraft,
   isLoading,
   hasError,
 });

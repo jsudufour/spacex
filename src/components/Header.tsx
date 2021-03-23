@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { colors } from "../utils/colors";
 import { spacings } from "../utils/spacings";
 import logo from "../assets/spacex.jpg";
+import { DRAGONS, ROCKETS } from "../store/constants";
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -54,16 +55,16 @@ export const Header = ({ toggleSpacecrafts, currentSpacecrafts }: Props) => (
     <Logo src={logo} alt="spacex logo" />
     <AlignedItems>
       <Chip
-        isActive={currentSpacecrafts === "ROCKETS"}
-        onClick={() => toggleSpacecrafts("ROCKETS")}
+        isActive={currentSpacecrafts === ROCKETS}
+        onClick={() => toggleSpacecrafts(ROCKETS)}
       >
-        <Title isActive={currentSpacecrafts === "ROCKETS"}>rockets</Title>
+        <Title isActive={currentSpacecrafts === ROCKETS}>rockets</Title>
       </Chip>
       <Chip
-        isActive={currentSpacecrafts === "DRAGONS"}
-        onClick={() => toggleSpacecrafts("DRAGONS")}
+        isActive={currentSpacecrafts === DRAGONS}
+        onClick={() => toggleSpacecrafts(DRAGONS)}
       >
-        <Title isActive={currentSpacecrafts === "DRAGONS"}>dragons</Title>
+        <Title isActive={currentSpacecrafts === DRAGONS}>dragons</Title>
       </Chip>
     </AlignedItems>
   </HeaderWrapper>

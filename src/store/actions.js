@@ -10,7 +10,14 @@ import {
   FETCH_DRAGON_DETAILS_SUCCESS,
   FETCH_SPACECRAFT_DETAILS_FAIL,
 } from "./constants";
-import { getRocketsUrl, getDragonsUrl, makeRequest } from "../api";
+import {
+  makeRequest,
+  makeRequestWithParams,
+  getRocketsUrl,
+  getDragonsUrl,
+  getOneRocketUrl,
+  getOneDragonUrl,
+} from "../api";
 
 export const fetchRocketsRequest = () => (dispatch) => {
   dispatch({ type: FETCH_ROCKETS_REQUEST });
@@ -20,40 +27,38 @@ export const fetchRocketsRequest = () => (dispatch) => {
   makeRequest(dispatch, url, FETCH_ROCKETS_SUCCESS, FETCH_SPACECRAFTS_FAIL);
 };
 
-export const fetchDragonsRequest = (limit, offset) => (dispatch) => {
+export const fetchDragonsRequest = () => (dispatch) => {
   dispatch({ type: FETCH_DRAGONS_REQUEST });
 
-  const url = getDragonsUrl(limit, offset);
+  const url = getDragonsUrl();
 
   makeRequest(dispatch, url, FETCH_DRAGONS_SUCCESS, FETCH_SPACECRAFTS_FAIL);
 };
 
-export const fetchSpacecraftsFail = (error) => ({
-  type: FETCH_SPACECRAFTS_FAIL,
-  payload: { error },
-});
+export const fetchRocketDetailsRequest = (id, spacecraftType) => (dispatch) => {
+  dispatch({ type: FETCH_ROCKET_DETAILS_REQUEST });
 
-export const fetchRocketDetailsRequest = (id) => ({
-  type: FETCH_ROCKET_DETAILS_REQUEST,
-  payload: { id },
-});
+  const url = getOneRocketUrl(id);
 
-export const fetchRocketDetailsSucess = (data) => ({
-  type: FETCH_ROCKET_DETAILS_SUCCESS,
-  payload: { data },
-});
+  makeRequestWithParams(
+    dispatch,
+    url,
+    FETCH_ROCKET_DETAILS_SUCCESS,
+    FETCH_SPACECRAFT_DETAILS_FAIL,
+    spacecraftType
+  );
+};
 
-export const fetchDragonDetailsRequest = (id) => ({
-  type: FETCH_DRAGON_DETAILS_REQUEST,
-  payload: { id },
-});
+export const fetchDragonDetailsRequest = (id, spacecraftType) => (dispatch) => {
+  dispatch({ type: FETCH_DRAGON_DETAILS_REQUEST });
 
-export const fetchDragonDetailsSuccess = (data) => ({
-  type: FETCH_DRAGON_DETAILS_SUCCESS,
-  payload: { data },
-});
+  const url = getOneDragonUrl(id);
 
-export const fetchSpacecraftDetailsFail = (error) => ({
-  type: FETCH_SPACECRAFT_DETAILS_FAIL,
-  payload: { error },
-});
+  makeRequestWithParams(
+    dispatch,
+    url,
+    FETCH_DRAGON_DETAILS_SUCCESS,
+    FETCH_SPACECRAFT_DETAILS_FAIL,
+    spacecraftType
+  );
+};

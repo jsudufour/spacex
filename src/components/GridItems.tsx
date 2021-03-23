@@ -16,15 +16,17 @@ const GridWrapper = styled.div`
 type Props = {
   spacecrafts: Array<SummaryRocket | SummaryDragon>;
   showModal: () => void;
+  type: string;
 };
 
-export const GridItems = ({ spacecrafts, showModal }: Props) => (
+export const GridItems = ({ spacecrafts, showModal, type }: Props) => (
   <GridWrapper>
     {spacecrafts.map((spacecraft) => (
       <SummaryCard
         key={spacecraft.id}
         spacecraft={spacecraft}
         showModal={showModal}
+        type={type}
       />
     ))}
   </GridWrapper>

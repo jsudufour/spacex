@@ -4,6 +4,7 @@ import { colors } from "../utils/colors";
 import { spacings } from "../utils/spacings";
 import { DetailedRocket, DetailedDragon } from "../domain/types";
 import { PropertiesList } from "./PropertiesList";
+import { Loading } from "./Loading";
 
 const CardWrapper = styled.div`
   padding: ${spacings.small};
@@ -33,12 +34,24 @@ const Footer = styled.div`
 
 type Props = {
   spacecraft: DetailedRocket | DetailedDragon;
+  isLoading: boolean;
+  hasError: boolean;
 };
 
-export const DetailedCard = ({ spacecraft }: Props) => {
-  const { id, name, image, description, wikipedia, ...otherProps } = spacecraft;
+export const DetailedCard = ({ spacecraft, isLoading, hasError }: Props) => {
+  const {
+    type,
+    id,
+    name,
+    image,
+    description,
+    wikipedia,
+    ...otherProps
+  } = spacecraft;
 
-  return (
+  return isLoading && !spacecraft ? (
+    <Loading />
+  ) : (
     <CardWrapper>
       <Title>{name}</Title>
       <LineItem>

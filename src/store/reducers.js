@@ -20,15 +20,6 @@ export const rockets = (state = [], action) => {
   }
 };
 
-export const currentRocket = (state = null, action) => {
-  switch (action.type) {
-    case FETCH_ROCKET_DETAILS_SUCCESS:
-      return action.payload;
-    default:
-      return state;
-  }
-};
-
 export const dragons = (state = [], action) => {
   switch (action.type) {
     case FETCH_DRAGONS_SUCCESS:
@@ -38,9 +29,10 @@ export const dragons = (state = [], action) => {
   }
 };
 
-export const currentDragon = (state = null, action) => {
+export const currentSpacecraft = (state = null, action) => {
   switch (action.type) {
     case FETCH_DRAGON_DETAILS_SUCCESS:
+    case FETCH_ROCKET_DETAILS_SUCCESS:
       return action.payload;
     default:
       return state;
